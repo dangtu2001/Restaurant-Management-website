@@ -1,0 +1,293 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" href="./css/homepage.css"> -->
+    <style>
+        .background_container {
+            background-color: #1178B3;
+        }
+
+        a {
+            cursor: pointer;
+        }
+
+        h6 {
+            font-size: 18px;
+        }
+
+        .text-color {
+            color: #ffffff;
+        }
+
+        .food-item {
+            /* cursor: pointer; */
+            /* margin: 1px; */
+            border: solid #ccc 1px;
+            border-radius: 12px;
+        }
+
+        .cart {
+
+            /* height: 500rem; */
+            position: absolute;
+            top: 66;
+            left: 0;
+            right: 0;
+            bottom: -10000;
+            background: rgba(0, 0, 0, 0.4);
+
+            display: none;
+        }
+
+        .open {
+            display: block;
+        }
+
+        nav.foodtype-nav {
+            display: block;
+
+        }
+
+        .typefood-options {
+            list-style: none;
+        }
+
+        .typefood-item {
+            margin-left: -40px;
+        }
+
+        .typefood-item a {
+            padding: 10px 20px;
+            color: #ffffff;
+            display: block;
+            height: 50px;
+            text-decoration: none;
+            background-color: #1178B3;
+            user-select: none;
+        }
+
+        .typefood-item:hover a {
+            background-color: #0b3b6e;
+            color: #ffffff;
+        }
+
+        .typefood-item-active {
+            background-color: #0b3b6e !important;
+        }
+    </style>
+    <title>Tu</title>
+</head>
+
+<body>
+
+    <header class="section-header">
+        <div class="background_container">
+
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-8 col-sm-6 col-4 mt-2 mb-2">
+                        <img src="https://cdn3.f-cdn.com/contestentries/1484825/33424121/5ca0940377bf4_thumb900.jpg"
+                            alt="logo" width="100" height="50">
+                    </div>
+                    <!-- <div class="col-lg-6 col-sm-9">
+
+                        <form action="#" class="search ">
+                            <div class=" input-group w-100 pt-3">
+                                <input type="text" class="form-control" placeholder="Search" />
+                                <div class="input-group-append">
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div> -->
+                    <div class="col-lg-4 col-sm-6 col-8">
+                        <div class=" float-md-right row">
+                            <div class="">
+                                <a class="text-color col-2" href="/login">
+                                    <span> Đăng nhập </span>
+                                </a>
+                                |
+                                <a class="text-color col-8" href="/register">
+                                    <span> Đăng ký </span>
+                                </a>
+                                <a class="col-2" style="color: #ccc;" href="/login">
+                                    <i class="fas fa-shopping-cart" style="font-size: 1.5rem;"></i>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </header>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="foodtype-nav col-xl-2 col-lg-12 col-12 mt-xl-4" style="padding: 0;">
+                <ul class="typefood-options">
+                    <% for (let i=0; i < foodtypes.length; i++ ) { %>
+                        <li class="typefood-item">
+                            <a class="typefood-link" href="#<%=foodtypes[i].id%>">
+                                <%= foodtypes[i].name %>
+                            </a>
+                        </li>
+
+                        <% } %>
+                </ul>
+            </nav>
+
+            <div class="container col-xl-10 col-lg-12 col-12" style="margin-top: 10px;">
+                <div class="input-group rounded">
+                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
+                        id="searchInput" aria-describedby="search-addon" value=<%=search %>> </input>
+                    <span class="input-group-text border-0" id="search-addon">
+                        <i class="fas fa-search"></i>
+                    </span>
+                </div>
+                <div id="div-foods">
+                    <% for (let i=0; i < foodtypes.length; i++ ) { %>
+                        <div id="<%= foodtypes[i].id %>" class="row m-3">
+                            <h3 class="col-12 mb-4">
+                                <%= foodtypes[i].name %>
+                            </h3>
+
+                            <% for (let j=0; j < foodtypes[i].Foods.length; j++ ) { %>
+                                <div class="col-md-3 mb-3 container no-gutters">
+                                    <div class="food-item">
+                                        <div class="m-2">
+                                            <img src="<%= foodtypes[i].Foods[j].image %>" alt="a" style="width: 100%;">
+                                            <h6 style="width: 100%; height: 50px;" class="row-cols-12">
+                                                <%= foodtypes[i].Foods[j].name %>
+                                            </h6>
+                                            <div class="row">
+                                                <h5 class="col-7">
+                                                    <%= foodtypes[i].Foods[j].cost %>
+                                                </h5>
+                                                <div class="col-2 float-right">
+                                                    <a class="col-6" href="/login"
+                                                        style="border: none; background-color: #ffffff; color: black;">
+                                                        <i class="fas fa-shopping-cart" style="font-size: 1.5rem;"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <% } %>
+                        </div>
+                        <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <span>
+        <%- include('footer.ejs') %>
+    </span>
+    </div>
+    <!-- Link thư viện jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- Lợi làm -->
+    <script>
+        $(".typefood-link:not(.typefood-item-active)").on("click", function () {
+            $(".typefood-item-active").removeClass("typefood-item-active");
+            $(this).addClass("typefood-item-active");
+        });
+        $(document).on('click', 'a[href^="#"]', function (event) {
+            event.preventDefault();
+
+            $('html, body').animate({
+                scrollTop: $($.attr(this, 'href')).offset().top
+            }, 500);
+        });
+    </script>
+
+    <script>
+        //setup before functions
+        var typingTimer;                //timer identifier
+        var doneTypingInterval = 500;  //time in ms
+        var $input = $('#searchInput');
+
+        //on keyup, start the countdown
+        $input.on('keyup', function () {
+            // if (!this.value) {
+            //     alert('The box is empty');
+            // }
+            clearTimeout(typingTimer);
+            typingTimer = setTimeout(doneTyping, doneTypingInterval);
+        });
+
+        //on keydown, clear the countdown 
+        $input.on('keydown', function () {
+            clearTimeout(typingTimer);
+        });
+
+        //user is "finished typing," do something
+        function doneTyping() {
+            //do something
+            const keywords = $input.val();
+            $.ajax({
+                url: "/",
+                data: jQuery.param({
+                    keywords: keywords
+                }),
+                type: 'GET',
+                // contentType: "application/json; charset=utf-8",
+                dataType: "html",
+                success: (data) => {
+                    console.log(data);
+                    $('body').html(data);
+                },
+                error: function (jqXHR, error, errorThrown) {
+                    //display error
+                    console.log('success');
+                    console.log(error);
+                },
+            })
+        }
+
+        $input.on('change keyup copy paste cut', function () {
+            if (!this.value) {
+                $.ajax({
+                    url: "/",
+                    type: 'GET',
+                    // contentType: "application/json; charset=utf-8",
+                    dataType: "html",
+                    success: (data) => {
+                        console.log(data);
+                        $('body').html(data);
+                    },
+                    error: function (jqXHR, error, errorThrown) {
+                        //display error
+                        console.log(error);
+                    },
+                })
+            }
+
+            console.log(`this.value ${this.value}`)
+        });
+    </script>
+</body>
+
+</html>
